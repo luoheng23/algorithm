@@ -9,3 +9,7 @@ this is to learn introduction to algorithm book
 #### chapter4
 * max sub array: find max sub array, two versions of nlgn and n
 * simple strassen: compute complex multiply using 3 multiplies
+
+#### chapter5
+* rand: produce rand(a,b), 0.5 for rand(0, 1)
+* shuffle: a simple method to shuffle array
