@@ -12,7 +12,7 @@ func TestMergeSort(t *testing.T) {
 }
 
 func BenchmarkMergeSort(b *testing.B) {
-	const LENGTH = 10000
+	const LENGTH = 100000
 	var s [LENGTH]int
 	for i := LENGTH; i > 0; i-- {
 		s[LENGTH-i] = i
@@ -20,5 +20,31 @@ func BenchmarkMergeSort(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		ss := s
 		MergeSort(ss[:], 0, len(s))
+	}
+}
+
+func TestMergeSortGo(t *testing.T) {
+	const LENGTH = 10000
+	var s [LENGTH]int
+	var sortedS [LENGTH]int
+	for i := LENGTH; i > 0; i-- {
+		s[LENGTH-i] = i
+		sortedS[i-1] = i
+	}
+	MergeSortGo(s[:], 0, len(s))
+	if s != sortedS {
+		t.Errorf("MergeSort failed. Expected %v, Got %v", sortedS, s)
+	}
+}
+
+func BenchmarkMergeSortGo(b *testing.B) {
+	const LENGTH = 100000
+	var s [LENGTH]int
+	for i := LENGTH; i > 0; i-- {
+		s[LENGTH-i] = i
+	}
+	for i := 0; i < b.N; i++ {
+		ss := s
+		MergeSortGo(ss[:], 0, len(s))
 	}
 }
