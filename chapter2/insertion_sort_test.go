@@ -21,11 +21,13 @@ func TestInsertionSortDecr(t *testing.T) {
 }
 
 func BenchmarkInsertionSort(b *testing.B) {
-	var s [100]int
-	for i := 100; i > 0; i-- {
-		s[100-i] = i
+	const LENGTH = 10000
+	var s [LENGTH]int
+	for i := LENGTH; i > 0; i-- {
+		s[LENGTH-i] = i
 	}
 	for i := 0; i < b.N; i++ {
-		InsertionSort(s[:])
+		ss := s
+		InsertionSort(ss[:])
 	}
 }

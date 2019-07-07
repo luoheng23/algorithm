@@ -12,11 +12,13 @@ func TestMergeSort(t *testing.T) {
 }
 
 func BenchmarkMergeSort(b *testing.B) {
-	var s [100]int
-	for i := 100; i > 0; i-- {
-		s[100-i] = i
+	const LENGTH = 10000
+	var s [LENGTH]int
+	for i := LENGTH; i > 0; i-- {
+		s[LENGTH-i] = i
 	}
 	for i := 0; i < b.N; i++ {
-		MergeSort(s[:], 0, len(s))
+		ss := s
+		MergeSort(ss[:], 0, len(s))
 	}
 }
