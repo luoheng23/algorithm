@@ -1,4 +1,4 @@
-package chapter1
+package chapter2
 
 func InsertionSort(A []int) {
 	for j := 1; j < len(A); j++ {
