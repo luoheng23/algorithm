@@ -38,3 +38,20 @@ func MaxSubArray(A []int, low, high int) (leftPos int, rightPos int, sum int) {
 		}
 	}
 }
+
+func MaxSubArrayLine(A []int) (leftPos int, rightPos int, sum int){
+	var l, r, s int
+	for i, e := range A {
+		if s >= 0 {
+			s += e
+			r++
+		} else {
+			s = e
+			l, r = i, i
+		}
+		if sum < s {
+			leftPos, rightPos, sum = l, r, s
+		}
+	}
+	return leftPos, rightPos, sum
+}
