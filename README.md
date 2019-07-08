@@ -31,3 +31,8 @@ this is to learn introduction to algorithm book
 * max
 * minMax: find min and max in 1.5n comparison
 * randSelect: find the ith elements in O(n)
+
+#### chapter10
+* stack
+* queue
+* linkedList
