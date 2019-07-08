@@ -22,3 +22,6 @@ this is to learn introduction to algorithm book
 #### chapter7
 * quickSort
 * randQuickSort
+
+#### chapter8
+* countSort
