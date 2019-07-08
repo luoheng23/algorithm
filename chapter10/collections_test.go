@@ -25,3 +25,24 @@ func TestStack(t *testing.T) {
 		t.Errorf("Stack failed. Expected True, Got False")
 	}
 }
+
+func TestQueue(t *testing.T) {
+	q := CreateQueue(10)
+	if v, ok := q.DeQueue(); ok == nil {
+		t.Errorf("Queue failed. Expected Error, Got %d", v)
+	}
+	q.EnQueue(2)
+	q.EnQueue(3)
+	q.EnQueue(4)
+	q.EnQueue(5)
+	a, _ := q.DeQueue()
+	b, _ := q.DeQueue()
+	c, _ := q.DeQueue()
+	d, _ := q.DeQueue()
+	if a != 2 || b != 3 || c != 4 || d != 5 {
+		t.Errorf("Queue failed. Expected (2, 3, 4, 5), Got (%d, %d, %d, %d)", a, b, c, d)
+	}
+	if v, ok := q.DeQueue(); ok == nil {
+		t.Errorf("Queue failed. Expected Error, Got %d", v)
+	}
+}
