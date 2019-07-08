@@ -13,3 +13,8 @@ this is to learn introduction to algorithm book
 #### chapter5
 * rand: produce rand(a,b), 0.5 for rand(0, 1)
 * shuffle: a simple method to shuffle array
+
+#### chapter6
+* heapSort
+* maxheap
+* minheap
