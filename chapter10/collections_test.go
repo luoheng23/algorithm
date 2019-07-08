@@ -46,3 +46,26 @@ func TestQueue(t *testing.T) {
 		t.Errorf("Queue failed. Expected Error, Got %d", v)
 	}
 }
+
+func TestDoubleLinkedList(t *testing.T) {
+	d := CreateDoubleLinkedList()
+	d.Insert(&node{key: 4})
+	d.Insert(&node{key: 6})
+	d.Insert(&node{key: 5})
+	d.Insert(&node{key: 3})
+	for _, a := range [4]int{3, 4, 5, 6} {
+		if d.Search(a).key != a {
+			t.Errorf("DoubleLinkedList failed. Expected %d, Got %d", a, d.Search(a).key)
+		}
+	}
+	d.Delete(d.Search(4))
+	for _, a := range [3]int{3, 5, 6} {
+		if d.Search(a).key != a {
+			t.Errorf("DoubleLinkedList failed. Expected %d, Got %d", a, d.Search(a).key)
+		}
+	}
+	if d.Search(4).key == 4 {
+		t.Errorf("DoubleLinkedList failed. Expected %d, Got %d", 4, d.Search(4).key)
+	}
+
+}
