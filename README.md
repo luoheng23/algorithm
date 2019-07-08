@@ -18,3 +18,7 @@ this is to learn introduction to algorithm book
 * heapSort
 * maxheap
 * minheap
+
+#### chapter7
+* quickSort
+* randQuickSort
