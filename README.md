@@ -25,3 +25,9 @@ this is to learn introduction to algorithm book
 
 #### chapter8
 * countSort
+
+#### chapter9
+* min
+* max
+* minMax: find min and max in 1.5n comparison
+* randSelect: find the ith elements in O(n)
