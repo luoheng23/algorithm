@@ -31,7 +31,7 @@ func QuickSort(A []int, p, r int) {
 func RandQuickSort(A []int, p, r int) {
 	if p+1 < r {
 		q := randPartition(A, p, r)
-		QuickSort(A, p, q)
-		QuickSort(A, q+1, r)
+		RandQuickSort(A, p, q)
+		RandQuickSort(A, q+1, r)
 	}
 }
