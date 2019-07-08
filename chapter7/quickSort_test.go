@@ -42,3 +42,29 @@ func BenchmarkRandQuickSort(b *testing.B) {
 		RandQuickSort(ss[:], 0, 10)
 	}
 }
+
+func TestRandQuickSortGo(t *testing.T) {
+	const LENGTH = 10000
+	var s [LENGTH]int
+	var ss [LENGTH]int
+	for i := 0; i < LENGTH; i++ {
+		s[LENGTH-i-1] = i
+		ss[i] = i
+	}
+	RandQuickSortGo(s[:], 0, LENGTH, nil)
+	if s != ss {
+		t.Errorf("InsertionSort failed. Expected %v, Got %v", ss, s)
+	}
+}
+
+func BenchmarkRandQuickSortGo(b *testing.B) {
+	const LENGTH = 10000
+	var s [LENGTH]int
+	for i := 0; i < LENGTH; i++ {
+		s[LENGTH-i-1] = i
+	}
+	for i := 0; i < b.N; i++ {
+		ss := s
+		RandQuickSortGo(ss[:], 0, 10000, nil)
+	}
+}

@@ -35,3 +35,23 @@ func RandQuickSort(A []int, p, r int) {
 		RandQuickSort(A, q+1, r)
 	}
 }
+
+func RandQuickSortGo(A []int, p, r int, chans chan<- int) {
+	if p+1 < r {
+		q := randPartition(A, p, r)
+		if r-p > 1000 {
+			c := make(chan int, 2)
+			go RandQuickSortGo(A, p, q, c)
+			go RandQuickSortGo(A, q+1, r, c)
+			for i := 0; i < 2; i++ {
+				<-c
+			}
+		} else {
+			RandQuickSortGo(A, p, q, nil)
+			RandQuickSortGo(A, q+1, r, nil)
+		}
+	}
+	if chans != nil {
+		chans <- 0
+	}
+}
