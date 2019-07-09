@@ -63,21 +63,21 @@ func PalindromeFast(p string) string {
 
 }
 
-func PalindromeVeryFast(p string) string {
-	cP := convert(p)
-	length := len(cP)
-	maxI, maxL, lastI := 0, 0, 0
-	for i := 1; i < length; i++ {
-		if 2*lastI-i < 0 || cP[2*lastI-i] != cP[i] {
-			if i-2 >= 0 && cP[i-2] == cP[i] {
-				lastI = i - 1
-			} else {
-				lastI = i
-			}
-		}
-		if i-lastI > maxL {
-			maxI, maxL = lastI, i-lastI
-		}
-	}
-	return unConvert(cP[maxI-maxL : maxI+maxL+1])
-}
+// func PalindromeVeryFast(p string) string {
+// 	cP := convert(p)
+// 	length := len(cP)
+// 	maxI, maxL, lastI := 0, 0, 0
+// 	for i := 1; i < length; i++ {
+// 		if 2*lastI-i < 0 || cP[2*lastI-i] != cP[i] {
+// 			if i-2 >= 0 && cP[i-2] == cP[i] {
+// 				lastI = i - 1
+// 			} else {
+// 				lastI = i
+// 			}
+// 		}
+// 		if i-lastI > maxL {
+// 			maxI, maxL = lastI, i-lastI
+// 		}
+// 	}
+// 	return unConvert(cP[maxI-maxL : maxI+maxL+1])
+// }
