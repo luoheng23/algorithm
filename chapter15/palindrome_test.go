@@ -36,3 +36,21 @@ func BenchmarkPalindromeFast(b *testing.B) {
 		PalindromeFast(s)
 	}
 }
+
+func TestPalindromeVeryFast(t *testing.T) {
+	// s1 := "caracter"
+	// s2 := "ttccabbaccd"
+	s1 := "abcdefghij"
+	s2 := "aabcdefgc"
+	if PalindromeVeryFast(s1) != "a" || PalindromeVeryFast(s2) != "aa" {
+		t.Errorf("PalindromeVeryFast failed. Expected (a, aa), Got (%s, %s)", PalindromeVeryFast(s1), PalindromeVeryFast(s2))
+	}
+}
+
+func BenchmarkPalindromeVeryFast(b *testing.B) {
+	s := "abcdefafadsafasdfsdfsccdfhzhvxzjkhfkfhskdhfjsfewufiwe"
+	s = strings.Repeat(s, 200)
+	for i := 0; i < b.N; i++ {
+		PalindromeVeryFast(s)
+	}
+}
