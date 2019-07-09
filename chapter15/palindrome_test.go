@@ -15,8 +15,24 @@ func TestPalindromeSlow(t *testing.T) {
 
 func BenchmarkPalindromeSlow(b *testing.B) {
 	s := "abcdefafadsafasdfsdfsccdfhzhvxzjkhfkfhskdhfjsfewufiwe"
-	s = strings.Repeat(s, 20)
+	s = strings.Repeat(s, 200)
 	for i := 0; i < b.N; i++ {
 		PalindromeSlow(s)
+	}
+}
+
+func TestPalindromeFast(t *testing.T) {
+	s1 := "caracter"
+	s2 := "ttccabbaccd"
+	if PalindromeFast(s1) != "carac" || PalindromeFast(s2) != "ccabbacc" {
+		t.Errorf("PalindromeFast failed. Expected (carac, ccabbacc), Got (%s, %s)", PalindromeFast(s1), PalindromeFast(s2))
+	}
+}
+
+func BenchmarkPalindromeFast(b *testing.B) {
+	s := "abcdefafadsafasdfsdfsccdfhzhvxzjkhfkfhskdhfjsfewufiwe"
+	s = strings.Repeat(s, 200)
+	for i := 0; i < b.N; i++ {
+		PalindromeFast(s)
 	}
 }
