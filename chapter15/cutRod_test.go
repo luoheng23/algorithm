@@ -44,3 +44,12 @@ func BenchmarkCutRodFast(b *testing.B) {
 		CutRodBottomFast(p, LENGTH)
 	}
 }
+
+func TestCutRodSolution(t *testing.T) {
+	p := []int{0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30}
+	s := CutRodSolution(p, 10)
+	s2 := CutRodSolution(p, 7)
+	if s[0] != 10 || s2[0] != 1 || s2[1] != 6 {
+		t.Errorf("CutRodFast failed. Expected (10, [1, 6]), Got (%d, %v)", s[0], s2)
+	}
+}

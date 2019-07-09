@@ -53,3 +53,29 @@ func CutRodBottomFast(p []int, n int) int {
 	}
 	return r[n]
 }
+
+func cutRodSolution(p []int, n int) (r, s []int) {
+	r, s = make([]int, n+1), make([]int, n+1)
+	for i := 1; i <= n; i++ {
+		q := -1
+		for j := 1; j <= i; j++ {
+			newQ := p[j] + r[i-j]
+			if q < newQ {
+				q = newQ
+				s[i] = j
+			}
+		}
+		r[i] = q
+	}
+	return r, s
+}
+
+func CutRodSolution(p []int, n int) []int {
+	_, s := cutRodSolution(p, n)
+	r := []int{}
+	for n > 0 {
+		r = append(r, s[n])
+		n -= s[n]
+	}
+	return r
+}
