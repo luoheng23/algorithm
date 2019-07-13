@@ -13,6 +13,7 @@ func unConvert(p string) string {
 	return strings.Join(strings.Split(p, "#"), "")
 }
 
+// PalindromeSlow solve palindrome problem
 func PalindromeSlow(p string) string {
 	cP := convert(p)
 	length := len(cP)
@@ -31,6 +32,7 @@ func PalindromeSlow(p string) string {
 	return unConvert(cP[maxI-maxL/2 : maxI+maxL/2+1])
 }
 
+// PalindromeFast solve palindrome problem
 func PalindromeFast(p string) string {
 	cP := convert(p)
 	length := len(cP)

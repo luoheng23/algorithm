@@ -1,5 +1,6 @@
 package chapter15
 
+// CutRodSlow solve cut rod problem
 func CutRodSlow(p []int, n int) int {
 	if n == 0 {
 		return 0
@@ -14,6 +15,7 @@ func CutRodSlow(p []int, n int) int {
 	return q
 }
 
+// CutRodMemorizedAux solve cut rod problem
 func CutRodMemorizedAux(p []int, n int, r []int) int {
 	if r[n] >= 0 {
 		return r[n]
@@ -31,6 +33,7 @@ func CutRodMemorizedAux(p []int, n int, r []int) int {
 	return q
 }
 
+// CutRodMemorizedFast solve cut rod problem
 func CutRodMemorizedFast(p []int, n int) int {
 	r := make([]int, n+1)
 	for i := 0; i <= n; i++ {
@@ -39,6 +42,7 @@ func CutRodMemorizedFast(p []int, n int) int {
 	return CutRodMemorizedAux(p, n, r)
 }
 
+// CutRodBottomFast solve cut rod problem
 func CutRodBottomFast(p []int, n int) int {
 	r := make([]int, n+1)
 	for i := 1; i <= n; i++ {
@@ -70,6 +74,7 @@ func cutRodSolution(p []int, n int) (r, s []int) {
 	return r, s
 }
 
+// CutRodSolution solve cut rod problem
 func CutRodSolution(p []int, n int) []int {
 	_, s := cutRodSolution(p, n)
 	r := []int{}
