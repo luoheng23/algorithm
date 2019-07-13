@@ -44,3 +44,8 @@ this is to learn introduction to algorithm book
 * cutRod
 * palindrome
 * 01 bag, normal bag, fraction bag
+
+#### chapter22
+* graph
+* bfs
+* strongly-connected-components: (u, v) and (v, u) DFS
