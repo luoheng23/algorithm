@@ -39,3 +39,8 @@ this is to learn introduction to algorithm book
 
 #### chapter12
 * searchTree
+
+#### chapter15
+* cutRod
+* palindrome
+* 01 bag, normal bag, fraction bag
