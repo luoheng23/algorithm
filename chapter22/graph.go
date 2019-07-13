@@ -14,7 +14,7 @@ type vertex struct {
 
 // Vertex represent vertex
 type Vertex struct {
-	key int
+	vertex
 	next *Node
 }
 
@@ -30,8 +30,9 @@ type Graph struct {
 	len int
 }
 
+// Matrix represent graph
 type Matrix struct {
-	vs []int
+	vs []vertex
 	matrix [][]int
 	len int
 }
@@ -42,6 +43,7 @@ func InitGraph(vs []vertex, es []edge, n int) Graph {
 	graph.table = make([]Vertex, n+1)
 	for _, v := range vs {
 		graph.table[v.v].key = v.key
+		graph.table[v.v].v = v.v
 	}
 	for _, e := range es {
 		node := Node{v: e.v}
@@ -51,11 +53,13 @@ func InitGraph(vs []vertex, es []edge, n int) Graph {
 	return graph
 }
 
+// InitMatrix init a graph
 func InitMatrix(vs []vertex, es []edge, n int) Matrix {
 	m := Matrix{len: n}
-	m.vs = make([]int, n+1)
+	m.vs = make([]vertex, n+1)
 	for _, v := range vs {
-		m.vs[v.v] = v.key
+		m.vs[v.v].key = v.key
+		m.vs[v.v].v = v.v
 	}
 	m.matrix = make([][]int, n+1)
 	for i:= 0; i < n + 1; i++ {
