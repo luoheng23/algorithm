@@ -20,6 +20,7 @@ func randPartition(A []int, p, r int) int {
 	return partition(A, p, r)
 }
 
+// QuickSort O(nlgn)
 func QuickSort(A []int, p, r int) {
 	if p+1 < r {
 		q := partition(A, p, r)
@@ -28,6 +29,7 @@ func QuickSort(A []int, p, r int) {
 	}
 }
 
+// RandQuickSort O(nlgn)
 func RandQuickSort(A []int, p, r int) {
 	if p+1 < r {
 		q := randPartition(A, p, r)
@@ -36,6 +38,7 @@ func RandQuickSort(A []int, p, r int) {
 	}
 }
 
+// RandQuickSortGo O(nlgn)
 func RandQuickSortGo(A []int, p, r int, chans chan<- int) {
 	if p+1 < r {
 		q := randPartition(A, p, r)
@@ -53,5 +56,45 @@ func RandQuickSortGo(A []int, p, r int, chans chan<- int) {
 	}
 	if chans != nil {
 		chans <- 0
+	}
+}
+
+func partitionSameElement(A []int, p, r int) (int, int) {
+	x, i, j := A[r-1], p, r
+	for k := p; k < j; k++ {
+		if A[k] <= x {
+			A[i], A[k] = A[k], A[i]
+			if A[i] != x {
+				i++
+			}
+		} else if A[k] > x {
+			j--
+			A[j], A[k] = A[k], A[j]
+		}
+	}
+	return i, j
+}
+
+func randPartitionSameElement(A []int, p, r int) (int, int) {
+	i := rand.Intn(r-p) + p
+	A[i], A[r-1] = A[r-1], A[i]
+	return partitionSameElement(A, p, r)
+}
+
+// RandQuickSortSameElement O(nlgn)
+func RandQuickSortSameElement(A []int, p, r int) {
+	if p+1 < r {
+		q, t := randPartitionSameElement(A, p, r)
+		RandQuickSortSameElement(A, p, q)
+		RandQuickSortSameElement(A, t, r)
+	}
+}
+
+// TailRescursiveQuickSort O(nlgn)
+func TailRescursiveQuickSort(A []int, p, r int) {
+	for p+1 < r {
+		q, t := randPartitionSameElement(A, p, r)
+		TailRescursiveQuickSort(A, p, q)
+		p = t
 	}
 }

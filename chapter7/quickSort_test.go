@@ -31,6 +31,15 @@ func TestRandQuickSort(t *testing.T) {
 	}
 }
 
+func TestRandQuickSortSameElement(t *testing.T) {
+	s := [10]int{5, 3, 7, 8, 3, 3, 0, 3, 2, 1}
+	RandQuickSortSameElement(s[:], 0, 10)
+	sortedS := [10]int{0, 1, 2, 3, 3, 3, 3, 5, 7, 8}
+	if s != sortedS {
+		t.Errorf("InsertionSort failed. Expected %v, Got %v", sortedS, s)
+	}
+}
+
 func BenchmarkRandQuickSort(b *testing.B) {
 	const LENGTH = 10000
 	var s [LENGTH]int
