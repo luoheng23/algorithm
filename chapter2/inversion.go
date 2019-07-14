@@ -22,7 +22,7 @@ func count(A []int, p, q, r int) int {
 	return count
 }
 
-// MergeCount for inversion
+// MergeCount O(n^2)
 func MergeCount(A []int, p, r int) int {
 	c := 0
 	if r > p+1 {
@@ -56,7 +56,7 @@ func mergeCountGo(A []int, p, r int, m chan<- int) int {
 	return c
 }
 
-// MergeCountGo for goroutine array
+// MergeCountGo O(n^2)
 func MergeCountGo(A []int, p, r int) int {
 	c := 0
 	if r > p+1 {

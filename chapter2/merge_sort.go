@@ -18,7 +18,7 @@ func merge(A []int, p, q, r int) {
 	}
 }
 
-// MergeSort for array
+// MergeSort O(nlgn)
 func MergeSort(A []int, p, r int) {
 	if r > p+1 {
 		q := (r + p) / 2
@@ -48,7 +48,7 @@ func mergeSortGo(A []int, p, r int, m chan<- int) {
 	}
 }
 
-// MergeSortGo for goroutine array
+// MergeSortGo O(nlgn)
 func MergeSortGo(A []int, p, r int) {
 	if r > p+1 {
 		q := (r + p) / 2
