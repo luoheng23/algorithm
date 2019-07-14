@@ -21,25 +21,25 @@ func maxCrossSubArray(A []int, low, mid, high int) (leftPos int, rightPos int, s
 	return leftPos, rightPos, sum
 }
 
+// MaxSubArray O(n^2)
 func MaxSubArray(A []int, low, high int) (leftPos int, rightPos int, sum int) {
 	if high == low+1 {
 		return low, high, A[low]
-	} else {
-		mid := (low + high) / 2
-		leftLeftPos, leftRightPos, leftSum := MaxSubArray(A, low, mid)
-		rightLeftPos, rightRightPos, rightSum := MaxSubArray(A, mid, high)
-		crossLeftPos, crossRightPos, crossSum := maxCrossSubArray(A, low, mid, high)
-		if leftSum >= rightSum && leftSum >= crossSum {
-			return leftLeftPos, leftRightPos, leftSum
-		} else if rightSum >= leftSum && rightSum >= crossSum {
-			return rightLeftPos, rightRightPos, rightSum
-		} else {
-			return crossLeftPos, crossRightPos, crossSum
-		}
 	}
+	mid := (low + high) / 2
+	leftLeftPos, leftRightPos, leftSum := MaxSubArray(A, low, mid)
+	rightLeftPos, rightRightPos, rightSum := MaxSubArray(A, mid, high)
+	crossLeftPos, crossRightPos, crossSum := maxCrossSubArray(A, low, mid, high)
+	if leftSum >= rightSum && leftSum >= crossSum {
+		return leftLeftPos, leftRightPos, leftSum
+	} else if rightSum >= leftSum && rightSum >= crossSum {
+		return rightLeftPos, rightRightPos, rightSum
+	}
+	return crossLeftPos, crossRightPos, crossSum
 }
 
-func MaxSubArrayLine(A []int) (leftPos int, rightPos int, sum int){
+// MaxSubArrayLine O(n)
+func MaxSubArrayLine(A []int) (leftPos int, rightPos int, sum int) {
 	var l, r, s int
 	for i, e := range A {
 		if s >= 0 {

@@ -1,5 +1,6 @@
 package chapter4
 
+// Multiply O(3)
 func Multiply(comp1 complex128, comp2 complex128) complex128 {
 	a, b := real(comp1), imag(comp1)
 	c, d := real(comp2), imag(comp2)
