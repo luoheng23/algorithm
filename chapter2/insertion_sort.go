@@ -1,5 +1,6 @@
 package chapter2
 
+// InsertionSort for array
 func InsertionSort(A []int) {
 	for j := 1; j < len(A); j++ {
 		key, i := A[j], j-1
@@ -11,6 +12,7 @@ func InsertionSort(A []int) {
 	}
 }
 
+// InsertionSortDecr for array
 func InsertionSortDecr(A []int) {
 	for j := 1; j < len(A); j++ {
 		key, i := A[j], j-1

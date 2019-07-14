@@ -1,11 +1,11 @@
 package chapter2
 
 func merge(A []int, p, q, r int) {
-	const INT_MAX = int(^uint(0) >> 1)
+	const INTMAX = int(^uint(0) >> 1)
 	A1, A2 := make([]int, q-p), make([]int, r-q)
 	copy(A1, A[p:q])
 	copy(A2, A[q:r])
-	A1, A2 = append(A1, INT_MAX), append(A2, INT_MAX)
+	A1, A2 = append(A1, INTMAX), append(A2, INTMAX)
 	i, j, k := 0, 0, 0
 	for k = p; k < r; k++ {
 		if A1[i] >= A2[j] {
@@ -18,6 +18,7 @@ func merge(A []int, p, q, r int) {
 	}
 }
 
+// MergeSort for array
 func MergeSort(A []int, p, r int) {
 	if r > p+1 {
 		q := (r + p) / 2
@@ -47,6 +48,7 @@ func mergeSortGo(A []int, p, r int, m chan<- int) {
 	}
 }
 
+// MergeSortGo for goroutine array
 func MergeSortGo(A []int, p, r int) {
 	if r > p+1 {
 		q := (r + p) / 2

@@ -1,11 +1,11 @@
 package chapter2
 
 func count(A []int, p, q, r int) int {
-	const INT_MAX = int(^uint(0) >> 1)
+	const INTMAX = int(^uint(0) >> 1)
 	A1, A2 := make([]int, q-p), make([]int, r-q)
 	copy(A1, A[p:q])
 	copy(A2, A[q:r])
-	A1, A2 = append(A1, INT_MAX), append(A2, INT_MAX)
+	A1, A2 = append(A1, INTMAX), append(A2, INTMAX)
 	i, j, k := 0, 0, 0
 	count := 0
 	n1 := len(A1) - 1
@@ -22,6 +22,7 @@ func count(A []int, p, q, r int) int {
 	return count
 }
 
+// MergeCount for inversion
 func MergeCount(A []int, p, r int) int {
 	c := 0
 	if r > p+1 {
@@ -55,6 +56,7 @@ func mergeCountGo(A []int, p, r int, m chan<- int) int {
 	return c
 }
 
+// MergeCountGo for goroutine array
 func MergeCountGo(A []int, p, r int) int {
 	c := 0
 	if r > p+1 {
