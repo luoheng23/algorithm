@@ -2,9 +2,10 @@
 this is to learn introduction to algorithm book
 
 #### chapter2
-* `insertion` sort: n^2
-* `merge` sort: nlgn
-* `inversion`: count number of inversions nlgn
+* insertion sort: n^2
+* merge sort: nlgn
+* inversion: count number of inversions nlgn
+* select sort
 
 #### chapter4
 * max sub array: find max sub array, two versions of nlgn and n
@@ -22,9 +23,13 @@ this is to learn introduction to algorithm book
 #### chapter7
 * quickSort
 * randQuickSort
+* tailRescursiveQuickSort
+* quickSort for same element
 
 #### chapter8
 * countSort
+* radixSort
+* bucketSort
 
 #### chapter9
 * min
