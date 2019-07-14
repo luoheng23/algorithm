@@ -21,7 +21,7 @@ func maxCrossSubArray(A []int, low, mid, high int) (leftPos int, rightPos int, s
 	return leftPos, rightPos, sum
 }
 
-// MaxSubArray O(n^2)
+// MaxSubArray O(nlgn)
 func MaxSubArray(A []int, low, high int) (leftPos int, rightPos int, sum int) {
 	if high == low+1 {
 		return low, high, A[low]
