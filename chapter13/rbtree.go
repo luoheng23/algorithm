@@ -3,8 +3,8 @@
 // 1. all nodes are red or black
 // 2. root is black
 // 3. leaf is black
-// 4. if Node is red, its' children are black
-// 5. for each Node, from it to leaf, all include same number of black Node
+// 4. if RBNode is red, its' children are black
+// 5. for each RBNode, from it to leaf, all include same number of black RBNode
 package chapter13
 
 type color bool
@@ -14,34 +14,34 @@ const (
 	red   color = false
 )
 
-// Node of tree
-type Node struct {
+// RBNode of tree
+type RBNode struct {
 	key         int
 	color       color
-	left, right *Node
-	p           *Node
+	left, right *RBNode
+	p           *RBNode
 }
 
 // RBTree is black and red tree
 type RBTree struct {
-	null *Node
-	root *Node
+	null *RBNode
+	root *RBNode
 }
 
 // CreateRBTree create a tree
 func CreateRBTree(A []int) RBTree {
 	r := RBTree{
-		null: &Node{color: black},
+		null: &RBNode{color: black},
 	}
 	r.root = r.null
 	for _, a := range A {
-		r.Insert(&Node{key: a})
+		r.Insert(&RBNode{key: a})
 	}
 	return r
 }
 
 // InOrder performs inorder walk
-func (r *RBTree) InOrder(x *Node) []int {
+func (r *RBTree) InOrder(x *RBNode) []int {
 	var A []int
 	if x != r.null {
 		A = append(A, r.InOrder(x.left)...)
@@ -52,7 +52,7 @@ func (r *RBTree) InOrder(x *Node) []int {
 }
 
 // PreOrder performs preorder walk
-func (r *RBTree) PreOrder(x *Node) []int {
+func (r *RBTree) PreOrder(x *RBNode) []int {
 	var A []int
 	if x != r.null {
 		A = append(A, x.key)
@@ -63,7 +63,7 @@ func (r *RBTree) PreOrder(x *Node) []int {
 }
 
 // PostOrder performs postorder walk
-func (r *RBTree) PostOrder(x *Node) []int {
+func (r *RBTree) PostOrder(x *RBNode) []int {
 	var A []int
 	if x != r.null {
 		A = append(A, r.InOrder(x.left)...)
@@ -74,7 +74,7 @@ func (r *RBTree) PostOrder(x *Node) []int {
 }
 
 // Search for a key
-func (r *RBTree) Search(x *Node, k int) *Node {
+func (r *RBTree) Search(x *RBNode, k int) *RBNode {
 	if x == r.null || k == x.key {
 		return x
 	} else if k < x.key {
@@ -85,7 +85,7 @@ func (r *RBTree) Search(x *Node, k int) *Node {
 }
 
 // QuickSearch for a key
-func (r *RBTree) QuickSearch(x *Node, k int) *Node {
+func (r *RBTree) QuickSearch(x *RBNode, k int) *RBNode {
 	for x != r.null && k != x.key {
 		if k < x.key {
 			x = x.left
@@ -96,24 +96,24 @@ func (r *RBTree) QuickSearch(x *Node, k int) *Node {
 	return x
 }
 
-// Min minimum Node
-func (r *RBTree) Min(x *Node) *Node {
+// Min minimum RBNode
+func (r *RBTree) Min(x *RBNode) *RBNode {
 	for x.left != r.null {
 		x = x.left
 	}
 	return x
 }
 
-// Max maximum Node
-func (r *RBTree) Max(x *Node) *Node {
+// Max maximum RBNode
+func (r *RBTree) Max(x *RBNode) *RBNode {
 	for x.right != r.null {
 		x = x.right
 	}
 	return x
 }
 
-// Successor previous Node
-func (r *RBTree) Successor(x *Node) *Node {
+// Successor previous RBNode
+func (r *RBTree) Successor(x *RBNode) *RBNode {
 	if x.right != r.null {
 		return r.Min(x.right)
 	}
@@ -124,8 +124,8 @@ func (r *RBTree) Successor(x *Node) *Node {
 	return y
 }
 
-// Preccessor post Node
-func (r *RBTree) Preccessor(x *Node) *Node {
+// Preccessor post RBNode
+func (r *RBTree) Preccessor(x *RBNode) *RBNode {
 	if x.left != r.null {
 		return r.Max(x.left)
 	}
@@ -136,7 +136,7 @@ func (r *RBTree) Preccessor(x *Node) *Node {
 	return y
 }
 
-func (r *RBTree) leftRotate(x *Node) {
+func (r *RBTree) leftRotate(x *RBNode) {
 	y := x.right
 	x.right = y.left
 	if y.left != r.null {
@@ -154,7 +154,7 @@ func (r *RBTree) leftRotate(x *Node) {
 	x.p = y
 }
 
-func (r *RBTree) rightRotate(x *Node) {
+func (r *RBTree) rightRotate(x *RBNode) {
 	y := x.left
 	x.left = y.right
 	if y.right != r.null {
@@ -172,7 +172,7 @@ func (r *RBTree) rightRotate(x *Node) {
 	x.p = y
 }
 
-func (r *RBTree) insertFixUp(z *Node) {
+func (r *RBTree) insertFixUp(z *RBNode) {
 	for z.p.color == red {
 		if z.p == z.p.p.left {
 			y := z.p.p.right
@@ -205,8 +205,8 @@ func (r *RBTree) insertFixUp(z *Node) {
 	r.root.color = black
 }
 
-// Insert a Node
-func (r *RBTree) Insert(z *Node) {
+// Insert a RBNode
+func (r *RBTree) Insert(z *RBNode) {
 	y, x := r.null, r.root
 	for x != r.null {
 		y = x
@@ -230,7 +230,7 @@ func (r *RBTree) Insert(z *Node) {
 	r.insertFixUp(z)
 }
 
-func (r *RBTree) transplant(u, v *Node) {
+func (r *RBTree) transplant(u, v *RBNode) {
 	if u.p == r.null {
 		r.root = v
 	} else if u == u.p.left {
@@ -241,7 +241,7 @@ func (r *RBTree) transplant(u, v *Node) {
 	v.p = u.p
 }
 
-func (r *RBTree) deleteFixUp(x *Node) {
+func (r *RBTree) deleteFixUp(x *RBNode) {
 	for x != r.root && x.color == black {
 		if x == x.p.left {
 			w := x.p.right
@@ -292,8 +292,8 @@ func (r *RBTree) deleteFixUp(x *Node) {
 	x.color = black
 }
 
-// Delete a Node
-func (r *RBTree) Delete(z *Node) {
+// Delete a RBNode
+func (r *RBTree) Delete(z *RBNode) {
 	y, yColor := z, z.color
 	if z.left == r.null {
 		z = z.right
