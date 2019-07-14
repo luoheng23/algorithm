@@ -1,43 +1,50 @@
-// include Stack, Queue, DoubleLinkedList
+// Package chapter10 include Stack, Queue, DoubleLinkedList
 package chapter10
 
 import "fmt"
 
+// Stack stack
 type Stack struct {
 	A   []int
 	top int
 	n   int
 }
 
+// CreateStack init a stack
 func CreateStack(n int) Stack {
 	s := Stack{}
 	s.A, s.top, s.n = make([]int, n), -1, n
 	return s
 }
 
-func (s *Stack) IsEmpty() bool {
+func (s *Stack) isEmpty() bool {
 	return s.top == -1
 }
 
+func (s *Stack) isFull() bool {
+	return s.top + 1 == s.n
+}
+
+// Push an element
 func (s *Stack) Push(x int) error {
-	if s.top+1 < s.n {
+	if s.isFull() {
 		s.top++
 		s.A[s.top] = x
 		return nil
-	} else {
-		return fmt.Errorf("overflow")
 	}
+	return fmt.Errorf("overflow")
 }
 
+// Pop an element
 func (s *Stack) Pop() (int, error) {
-	if s.IsEmpty() {
+	if s.isEmpty() {
 		return 0, fmt.Errorf("underflow")
-	} else {
-		s.top--
-		return s.A[s.top+1], nil
-	}
+	} 
+	s.top--
+	return s.A[s.top+1], nil
 }
 
+// Queue queue
 type Queue struct {
 	A      []int
 	tail   int
@@ -45,14 +52,24 @@ type Queue struct {
 	length int
 }
 
+// CreateQueue init a queue
 func CreateQueue(n int) Queue {
 	q := Queue{}
 	q.A, q.tail, q.head, q.length = make([]int, n), 0, 0, n
 	return q
 }
 
+func (q *Queue) isEmpty() bool {
+	return q.head == q.tail
+}
+
+func (q *Queue) isFull() bool {
+	return q.head == (q.tail + 1) % q.length
+}
+
+// EnQueue an element
 func (q *Queue) EnQueue(x int) error {
-	if q.head == (q.tail+1)%q.length {
+	if q.isFull() {
 		return fmt.Errorf("overflow")
 	}
 	q.A[q.tail] = x
@@ -60,8 +77,9 @@ func (q *Queue) EnQueue(x int) error {
 	return nil
 }
 
+// DeQueue an element
 func (q *Queue) DeQueue() (int, error) {
-	if q.head == q.tail {
+	if q.isEmpty() {
 		return 0, fmt.Errorf("underflow")
 	}
 	x := q.A[q.head]
@@ -69,23 +87,27 @@ func (q *Queue) DeQueue() (int, error) {
 	return x, nil
 }
 
-type node struct {
+// Node for linkedList
+type Node struct {
 	key  int
-	prev *node
-	next *node
+	prev *Node
+	next *Node
 }
 
+// DoubleLinkedList linkedList
 type DoubleLinkedList struct {
-	NIL *node // sentinel
+	NIL *Node // sentinel
 }
 
+// CreateDoubleLinkedList init a linkedList
 func CreateDoubleLinkedList() DoubleLinkedList {
-	d := DoubleLinkedList{NIL: &node{}}
+	d := DoubleLinkedList{NIL: &Node{}}
 	d.NIL.prev, d.NIL.next = d.NIL, d.NIL
 	return d
 }
 
-func (d *DoubleLinkedList) Search(k int) *node {
+// Search for a Node
+func (d *DoubleLinkedList) Search(k int) *Node {
 	x := d.NIL.next
 	for x != d.NIL && x.key != k {
 		x = x.next
@@ -93,12 +115,14 @@ func (d *DoubleLinkedList) Search(k int) *node {
 	return x
 }
 
-func (d *DoubleLinkedList) Delete(x *node) {
+// Delete a Node
+func (d *DoubleLinkedList) Delete(x *Node) {
 	x.prev.next = x.next
 	x.next.prev = x.prev
 }
 
-func (d *DoubleLinkedList) Insert(x *node) {
+// Insert a Node
+func (d *DoubleLinkedList) Insert(x *Node) {
 	x.next = d.NIL.next
 	d.NIL.next.prev = x
 	d.NIL.next = x
