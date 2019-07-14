@@ -2,7 +2,8 @@ package chapter6
 
 import "fmt"
 
-type heap struct {
+// Heap represents heap data strcuture
+type Heap struct {
 	A        []int
 	heapSize int
 }
@@ -19,7 +20,7 @@ func right(i int) int {
 	return 2*i + 1
 }
 
-func (h *heap) maxHeapify(i int) {
+func (h *Heap) maxHeapify(i int) {
 	l, r, largest := left(i), right(i), 0
 	if l < h.heapSize && h.A[l] > h.A[i] {
 		largest = l
@@ -35,24 +36,25 @@ func (h *heap) maxHeapify(i int) {
 	}
 }
 
-func (h *heap) minHeapify(i int) {
-	l, r, largest := left(i), right(i), 0
+func (h *Heap) minHeapify(i int) {
+	l, r, smallest := left(i), right(i), 0
 	if l < h.heapSize && h.A[l] < h.A[i] {
-		largest = l
+		smallest = l
 	} else {
-		largest = i
+		smallest = i
 	}
-	if r < h.heapSize && h.A[r] < h.A[largest] {
-		largest = r
+	if r < h.heapSize && h.A[r] < h.A[smallest] {
+		smallest = r
 	}
-	if largest != i {
-		h.A[i], h.A[largest] = h.A[largest], h.A[i]
-		h.minHeapify(largest)
+	if smallest != i {
+		h.A[i], h.A[smallest] = h.A[smallest], h.A[i]
+		h.minHeapify(smallest)
 	}
 }
 
-func BuildMaxHeap(A []int) heap {
-	h := heap{}
+// BuildMaxHeap O(n)
+func BuildMaxHeap(A []int) Heap {
+	h := Heap{}
 	h.A, h.heapSize = A, len(A)
 	for i := h.heapSize / 2; i >= 0; i-- {
 		h.maxHeapify(i)
@@ -60,8 +62,9 @@ func BuildMaxHeap(A []int) heap {
 	return h
 }
 
-func BuildMinHeap(A []int) heap {
-	h := heap{}
+// BuildMinHeap O(n)
+func BuildMinHeap(A []int) Heap {
+	h := Heap{}
 	h.A, h.heapSize = A, len(A)
 	for i := h.heapSize / 2; i >= 0; i-- {
 		h.minHeapify(i)
@@ -69,6 +72,7 @@ func BuildMinHeap(A []int) heap {
 	return h
 }
 
+// HeapSort O(nlgn)
 func HeapSort(A []int) {
 	h := BuildMaxHeap(A)
 	for i := len(A) - 1; i >= 0; i-- {
@@ -84,19 +88,23 @@ func HeapSort(A []int) {
 // Maximum
 // ExtractMax
 // IncreaseKey
-func (h *heap) InsertMax(x int) {
+
+// InsertMax O(lgn)
+func (h *Heap) InsertMax(x int) {
 	h.heapSize++
 	h.A[h.heapSize-1] = x - 1
 	h.IncreaseKey(h.heapSize-1, x)
 }
 
-func (h *heap) Maximum() int {
+// Maximum O(1)
+func (h *Heap) Maximum() int {
 	return h.A[0]
 }
 
-func (h *heap) ExtractMax() (int, error) {
+// ExtractMax O(lgn)
+func (h *Heap) ExtractMax() (int, error) {
 	if h.heapSize < 1 {
-		return 0, fmt.Errorf("heap overflow")
+		return 0, fmt.Errorf("Heap overflow")
 	}
 	max := h.A[0]
 	h.A[0] = h.A[h.heapSize-1]
@@ -105,7 +113,8 @@ func (h *heap) ExtractMax() (int, error) {
 	return max, nil
 }
 
-func (h *heap) IncreaseKey(i int, key int) error {
+// IncreaseKey O(lgn)
+func (h *Heap) IncreaseKey(i int, key int) error {
 	if key < h.A[i] {
 		return fmt.Errorf("new key is smaller than current key")
 	}
@@ -123,13 +132,16 @@ func (h *heap) IncreaseKey(i int, key int) error {
 // ExtractMin
 // DecreaseKey
 // InsertMin
-func (h *heap) Minimum() int {
+
+// Minimum O(1)
+func (h *Heap) Minimum() int {
 	return h.A[0]
 }
 
-func (h *heap) ExtractMin() (int, error) {
+// ExtractMin O(lgn)
+func (h *Heap) ExtractMin() (int, error) {
 	if h.heapSize < 1 {
-		return 0, fmt.Errorf("heap overflow")
+		return 0, fmt.Errorf("Heap overflow")
 	}
 	min := h.A[0]
 	h.A[0] = h.A[h.heapSize-1]
@@ -138,7 +150,8 @@ func (h *heap) ExtractMin() (int, error) {
 	return min, nil
 }
 
-func (h *heap) DecreaseKey(i int, key int) error {
+// DecreaseKey O(lgn)
+func (h *Heap) DecreaseKey(i int, key int) error {
 	if key > h.A[i] {
 		return fmt.Errorf("new key is bigger than current key")
 	}
@@ -150,7 +163,8 @@ func (h *heap) DecreaseKey(i int, key int) error {
 	return nil
 }
 
-func (h *heap) InsertMin(x int) {
+// InsertMin O(lgn)
+func (h *Heap) InsertMin(x int) {
 	h.heapSize++
 	h.A[h.heapSize-1] = x + 1
 	h.DecreaseKey(h.heapSize-1, x)
