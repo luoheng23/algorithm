@@ -1,6 +1,6 @@
 package chapter8
 
-// all elements are between 0 and k(include)
+// CountSort O(n + k)
 func CountSort(A []int, k int) {
 	c := make([]int, k+1)
 	for _, a := range A {
@@ -14,7 +14,7 @@ func CountSort(A []int, k int) {
 		c[A[j]]--
 		b[c[A[j]]] = A[j]
 	}
-	for i, _ := range A {
+	for i := range A {
 		A[i] = b[i]
 	}
 }
