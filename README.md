@@ -40,6 +40,10 @@ this is to learn introduction to algorithm book
 #### chapter12
 * searchTree
 
+#### chapter13
+* rbtree: red and black tree
+* avltree: avltree
+
 #### chapter15
 * cutRod
 * palindrome
