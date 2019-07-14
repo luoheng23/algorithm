@@ -140,6 +140,8 @@ func (r *AVLTree) leftRotate(x *AVLNode) {
 	}
 	y.left = x
 	x.p = y
+	x.h = max(x.left.h, x.right.h) + 1
+	y.h = max(y.left.h, y.right.h) + 1
 }
 
 func (r *AVLTree) rightRotate(x *AVLNode) {
@@ -158,6 +160,8 @@ func (r *AVLTree) rightRotate(x *AVLNode) {
 	}
 	y.right = x
 	x.p = y
+	x.h = max(x.left.h, x.right.h) + 1
+	y.h = max(y.left.h, y.right.h) + 1
 }
 
 func max(T ...height) height {
@@ -174,23 +178,15 @@ func (r *AVLTree) balance(z *AVLNode) {
 	for z != r.null {
 		if z.left.h > z.right.h+1 {
 			if z.left.right.h > z.left.left.h {
-				r.leftRotate(z.right)
-				z.left.left.h = max(z.left.left.right.h, z.left.left.left.h) + 1
-				z.left.h = max(z.left.right.h, z.left.left.h) + 1
+				r.leftRotate(z.left)
 			}
 			r.rightRotate(z)
-			z.h = max(z.left.h, z.right.h) + 1
-			z.p.h = max(z.p.left.h, z.p.right.h, z.h) + 1
 			z = z.p
 		} else if z.right.h > z.left.h+1 {
 			if z.right.left.h > z.right.right.h {
 				r.rightRotate(z.right)
-				z.right.right.h = max(z.right.right.left.h, z.right.right.right.h) + 1
-				z.right.h = max(z.right.left.h, z.right.right.h) + 1
 			}
 			r.leftRotate(z)
-			z.h = max(z.left.h, z.right.h) + 1
-			z.p.h = max(z.p.left.h, z.p.right.h, z.h) + 1
 			z = z.p
 		} else {
 			z.h = max(z.left.h, z.right.h) + 1
