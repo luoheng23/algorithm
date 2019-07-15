@@ -1,5 +1,7 @@
 package chapter13
 
+import "math"
+
 type height int
 
 // AVLNode of tree
@@ -10,7 +12,7 @@ type AVLNode struct {
 	p           *AVLNode
 }
 
-// AVLTree is black and red tree
+// AVLTree is AVL tree
 type AVLTree struct {
 	null *AVLNode
 	root *AVLNode
@@ -19,7 +21,7 @@ type AVLTree struct {
 // CreateAVLTree create a tree
 func CreateAVLTree(A []int) AVLTree {
 	r := AVLTree{
-		null: &AVLNode{h: 0},
+		null: &AVLNode{},
 	}
 	r.root = r.null
 	for _, a := range A {
@@ -229,17 +231,16 @@ func (r *AVLTree) transplant(u, v *AVLNode) {
 		u.p.right = v
 	}
 	v.p = u.p
-	r.balance(v.p)
 }
 
 // Delete a AVLNode
 func (r *AVLTree) Delete(z *AVLNode) {
-	y := z
+	y, x := z, z
 	if z.left == r.null {
-		y = z.right
+		x = z.right
 		r.transplant(z, z.right)
 	} else if z.right == r.null {
-		y = z.left
+		x = z.left
 		r.transplant(z, z.left)
 	} else {
 		y = r.Min(z.right)
@@ -251,8 +252,19 @@ func (r *AVLTree) Delete(z *AVLNode) {
 			y.right = z.right
 			y.right.p = y
 		}
+		r.transplant(z, y)
+		y.left = z.left
+		y.left.p = y
 	}
-	r.transplant(z, y)
-	y.left = z.left
-	y.left.p = y
+	r.balance(x.p)
+}
+
+func (s *AVLTree) isBalance(r *AVLNode) bool {
+	if r == s.null {
+		return true
+	}
+	if math.Abs(float64(r.left.h-r.right.h)) >= 2 {
+		return false
+	}
+	return s.isBalance(r.left) && s.isBalance(r.right)
 }

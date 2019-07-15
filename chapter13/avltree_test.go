@@ -1,11 +1,16 @@
 package chapter13
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestAVLTree(t *testing.T) {
 	A := [10]int{5, 3, 9, 0, 4, 8, 6, 2, 7, 1}
 	sortedA := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	s := CreateAVLTree(A[:])
+	if !s.isBalance(s.root) {
+		t.Errorf("AVLTree failed. Expected true, Got false")
+	}
 	for i, a := range s.InOrder(s.root) {
 		if a != sortedA[i] {
 			t.Errorf("SearchTree: Create failed. Expected %d, Got %d", sortedA[i], a)
@@ -24,5 +29,7 @@ func TestAVLTree(t *testing.T) {
 	if s.root.key != 6 {
 		t.Errorf("SearchTree: Delete failed. Expected 6, Got %d", s.root.key)
 	}
-
+	if !s.isBalance(s.root) {
+		t.Errorf("AVLTree failed. Expected true, Got false")
+	}
 }
