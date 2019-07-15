@@ -228,6 +228,11 @@ func (r *StatTree) Insert(z *StatNode) {
 	z.right = r.null
 	z.color = red
 	z.size = 1
+	x = z.p
+	for x != r.null {
+		x.size++
+		x = x.p
+	}
 	r.insertFixUp(z)
 }
 
@@ -296,16 +301,17 @@ func (r *StatTree) deleteFixUp(x *StatNode) {
 // Delete a StatNode
 func (r *StatTree) Delete(z *StatNode) {
 	y, yColor := z, z.color
+	x := z
 	if z.left == r.null {
-		z = z.right
+		x = z.right
 		r.transplant(z, z.right)
 	} else if z.right == r.null {
-		z = z.left
+		x = z.left
 		r.transplant(z, z.left)
 	} else {
 		y = r.Min(z.right)
 		yColor = y.color
-		x := y.right
+		x = y.right
 		if y.p == z {
 			x.p = y
 		} else {
@@ -313,13 +319,19 @@ func (r *StatTree) Delete(z *StatNode) {
 			y.right = z.right
 			y.right.p = y
 		}
+		r.transplant(z, y)
+		y.left = z.left
+		y.left.p = y
+		y.color = z.color
+		y.size = z.size
 	}
-	r.transplant(z, y)
-	y.left = z.left
-	y.left.p = y
-	y.color = z.color
+	t := x.p
+	for t != r.null {
+		t.size--
+		t = t.p
+	}
 	if yColor == black {
-		r.deleteFixUp(y)
+		r.deleteFixUp(x)
 	}
 }
 
@@ -346,4 +358,14 @@ func (r *StatTree) Rank(x *StatNode) int {
 		y = y.p
 	}
 	return s
+}
+
+func (r *StatTree) isSizeRight(s *StatNode) bool {
+	if s == r.null {
+		return true
+	}
+	if s.left.size + s.right.size + 1 != s.size {
+		return false
+	}
+	return r.isSizeRight(s.left) && r.isSizeRight(s.right)
 }

@@ -6,6 +6,9 @@ func TestStatTree(t *testing.T) {
 	A := [10]int{5, 3, 9, 0, 4, 8, 6, 2, 7, 1}
 	sortedA := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	s := CreateStatTree(A[:])
+	if !s.isSizeRight(s.root) {
+		t.Errorf("StatTree failed. Expected true, Got false")
+	}
 	for i, a := range s.InOrder(s.root) {
 		if a != sortedA[i] {
 			t.Errorf("SearchTree: Create failed. Expected %d, Got %d", sortedA[i], a)
@@ -23,6 +26,9 @@ func TestStatTree(t *testing.T) {
 	s.Delete(s.Search(s.root, 5))
 	if s.root.key != 6 {
 		t.Errorf("SearchTree: Delete failed. Expected 6, Got %d", s.root.key)
+	}
+	if !s.isSizeRight(s.root) {
+		t.Errorf("StatTree failed. Expected true, Got false")
 	}
 
 }
