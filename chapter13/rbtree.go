@@ -295,16 +295,17 @@ func (r *RBTree) deleteFixUp(x *RBNode) {
 // Delete a RBNode
 func (r *RBTree) Delete(z *RBNode) {
 	y, yColor := z, z.color
+	x := z
 	if z.left == r.null {
-		z = z.right
+		x = z.right
 		r.transplant(z, z.right)
 	} else if z.right == r.null {
-		z = z.left
+		x = z.left
 		r.transplant(z, z.left)
 	} else {
 		y = r.Min(z.right)
 		yColor = y.color
-		x := y.right
+		x = y.right
 		if y.p == z {
 			x.p = y
 		} else {
@@ -312,12 +313,12 @@ func (r *RBTree) Delete(z *RBNode) {
 			y.right = z.right
 			y.right.p = y
 		}
+		r.transplant(z, y)
+		y.left = z.left
+		y.left.p = y
+		y.color = z.color	
 	}
-	r.transplant(z, y)
-	y.left = z.left
-	y.left.p = y
-	y.color = z.color
 	if yColor == black {
-		r.deleteFixUp(y)
+		r.deleteFixUp(x)
 	}
 }
