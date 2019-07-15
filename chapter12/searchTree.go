@@ -1,24 +1,28 @@
 package chapter12
 
-type node struct {
+// Node for SearchTree
+type Node struct {
 	key         int
-	left, right *node
-	p           *node
+	left, right *Node
+	p           *Node
 }
 
+// SearchTree represents a tree
 type SearchTree struct {
-	root *node
+	root *Node
 }
 
+// CreateSearchTree init a tree
 func CreateSearchTree(A []int) SearchTree {
 	s := SearchTree{}
 	for _, a := range A {
-		s.Insert(&node{key: a})
+		s.Insert(&Node{key: a})
 	}
 	return s
 }
 
-func (s *SearchTree) InOrder(x *node) []int {
+// InOrder O(n)
+func (s *SearchTree) InOrder(x *Node) []int {
 	var A []int
 	if x != nil {
 		A = append(A, s.InOrder(x.left)...)
@@ -28,7 +32,8 @@ func (s *SearchTree) InOrder(x *node) []int {
 	return A
 }
 
-func (s *SearchTree) PreOrder(x *node) []int {
+// PreOrder O(n)
+func (s *SearchTree) PreOrder(x *Node) []int {
 	var A []int
 	if x != nil {
 		A = append(A, x.key)
@@ -38,7 +43,8 @@ func (s *SearchTree) PreOrder(x *node) []int {
 	return A
 }
 
-func (s *SearchTree) PostOrder(x *node) []int {
+// PostOrder O(n)
+func (s *SearchTree) PostOrder(x *Node) []int {
 	var A []int
 	if x != nil {
 		A = append(A, s.InOrder(x.left)...)
@@ -48,7 +54,8 @@ func (s *SearchTree) PostOrder(x *node) []int {
 	return A
 }
 
-func (s *SearchTree) Search(x *node, k int) *node {
+// Search rescursive search
+func (s *SearchTree) Search(x *Node, k int) *Node {
 	if x == nil || k == x.key {
 		return x
 	} else if k < x.key {
@@ -58,7 +65,8 @@ func (s *SearchTree) Search(x *node, k int) *node {
 	}
 }
 
-func (s *SearchTree) QuickSearch(x *node, k int) *node {
+// QuickSearch not rescursive search
+func (s *SearchTree) QuickSearch(x *Node, k int) *Node {
 	for x != nil && k != x.key {
 		if k < x.key {
 			x = x.left
@@ -69,22 +77,24 @@ func (s *SearchTree) QuickSearch(x *node, k int) *node {
 	return x
 }
 
-func (s *SearchTree) Min(x *node) *node {
+// Min minimum Node
+func (s *SearchTree) Min(x *Node) *Node {
 	for x.left != nil {
 		x = x.left
 	}
 	return x
 }
 
-func (s *SearchTree) Max(x *node) *node {
+// Max maximum Node
+func (s *SearchTree) Max(x *Node) *Node {
 	for x.right != nil {
 		x = x.right
 	}
 	return x
 }
 
-// InOrder
-func (s *SearchTree) Successor(x *node) *node {
+// Successor previous Node
+func (s *SearchTree) Successor(x *Node) *Node {
 	if x.right != nil {
 		return s.Min(x.right)
 	}
@@ -95,8 +105,8 @@ func (s *SearchTree) Successor(x *node) *node {
 	return y
 }
 
-// InOrder
-func (s *SearchTree) Preccessor(x *node) *node {
+// Preccessor latter Node
+func (s *SearchTree) Preccessor(x *Node) *Node {
 	if x.left != nil {
 		return s.Max(x.left)
 	}
@@ -107,7 +117,8 @@ func (s *SearchTree) Preccessor(x *node) *node {
 	return y
 }
 
-func (s *SearchTree) Insert(z *node) {
+// Insert O(lgn)
+func (s *SearchTree) Insert(z *Node) {
 	x := s.root
 	y := x
 	for x != nil {
@@ -128,7 +139,7 @@ func (s *SearchTree) Insert(z *node) {
 	}
 }
 
-func (s *SearchTree) transplant(u, v *node) {
+func (s *SearchTree) transplant(u, v *Node) {
 	if u.p == nil {
 		s.root = v
 	} else if u == u.p.left {
@@ -141,7 +152,8 @@ func (s *SearchTree) transplant(u, v *node) {
 	}
 }
 
-func (s *SearchTree) Delete(z *node) {
+// Delete O(1)
+func (s *SearchTree) Delete(z *Node) {
 	if z.left == nil {
 		s.transplant(z, z.right)
 	} else if z.right == nil {
@@ -158,3 +170,4 @@ func (s *SearchTree) Delete(z *node) {
 		y.left.p = y
 	}
 }
+
