@@ -60,9 +60,8 @@ func (s *SearchTree) Search(x *Node, k int) *Node {
 		return x
 	} else if k < x.key {
 		return s.Search(x.left, k)
-	} else {
-		return s.Search(x.right, k)
 	}
+	return s.Search(x.right, k)
 }
 
 // QuickSearch not rescursive search
@@ -77,23 +76,40 @@ func (s *SearchTree) QuickSearch(x *Node, k int) *Node {
 	return x
 }
 
-// Min minimum Node
+
+// Min rescursive
 func (s *SearchTree) Min(x *Node) *Node {
+	if x.left == nil {
+		return x
+	}
+	return s.Min(x.left)
+}
+
+// QuickMin minimum Node
+func (s *SearchTree) QuickMin(x *Node) *Node {
 	for x.left != nil {
 		x = x.left
 	}
 	return x
 }
 
-// Max maximum Node
+// Max rescursive
 func (s *SearchTree) Max(x *Node) *Node {
+	if x.right == nil {
+		return x
+	}
+	return s.Max(x.right)
+}
+
+// QuickMax maximum Node
+func (s *SearchTree) QuickMax(x *Node) *Node {
 	for x.right != nil {
 		x = x.right
 	}
 	return x
 }
 
-// Successor previous Node
+// Successor previous Node O(h)
 func (s *SearchTree) Successor(x *Node) *Node {
 	if x.right != nil {
 		return s.Min(x.right)
@@ -105,7 +121,7 @@ func (s *SearchTree) Successor(x *Node) *Node {
 	return y
 }
 
-// Preccessor latter Node
+// Preccessor latter Node O(h)
 func (s *SearchTree) Preccessor(x *Node) *Node {
 	if x.left != nil {
 		return s.Max(x.left)
@@ -152,7 +168,7 @@ func (s *SearchTree) transplant(u, v *Node) {
 	}
 }
 
-// Delete O(1)
+// Delete O(h)
 func (s *SearchTree) Delete(z *Node) {
 	if z.left == nil {
 		s.transplant(z, z.right)
