@@ -32,8 +32,6 @@ func TestCutRodFast(t *testing.T) {
 	}
 }
 
-// notice:
-// this benchmark is extremely slow, please don't run it
 func BenchmarkCutRodFast(b *testing.B) {
 	const LENGTH = 30
 	p := make([]int, LENGTH+1)

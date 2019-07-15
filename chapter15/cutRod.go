@@ -21,12 +21,10 @@ func CutRodMemorizedAux(p []int, n int, r []int) int {
 		return r[n]
 	}
 	q := 0
-	if n != 0 {
-		for i := 1; i <= n; i++ {
-			newQ := p[i] + CutRodMemorizedAux(p, n-i, r)
-			if q < newQ {
-				q = newQ
-			}
+	for i := 1; i <= n; i++ {
+		newQ := p[i] + CutRodMemorizedAux(p, n-i, r)
+		if q < newQ {
+			q = newQ
 		}
 	}
 	r[n] = q

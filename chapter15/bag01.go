@@ -54,7 +54,7 @@ func BagNormal(weight []int, value []int, maxWeight int) int {
 	return M[len(weight)-1][maxWeight]
 }
 
-// weightValue used in bagfraction
+// WeightValue used in bagfraction
 type WeightValue struct {
 	weight int
 	value  int
@@ -85,6 +85,7 @@ func partition(value []WeightValue, p, r int, maxWeight int) (int, float64, int)
 	return -1, -1, i
 }
 
+// BagFraction solve bagfraction problem
 func BagFraction(value []WeightValue, p, r int, maxWeight int) float64 {
 	if maxWeight <= 0 {
 		return 0
