@@ -15,7 +15,7 @@ func TestSearchTree(t *testing.T) {
 		t.Errorf("SearchTree: Min and Max failed. Expected (0, 9), Got (%d, %d)", s.Min(s.root).key, s.Max(s.root).key)
 	}
 	if s.Successor(s.Search(s.root, 4)).key != 5 {
-		t.Errorf("SearchTree: Successor failed. Expected 5, Got %d", s.Successor(&node{key: 4}).key)
+		t.Errorf("SearchTree: Successor failed. Expected 5, Got %d", s.Successor(&Node{key: 4}).key)
 	}
 	if s.Preccessor(s.Search(s.root, 5)).key != 4 {
 		t.Errorf("SearchTree: Preccessor failed. Expected 4, Got %d", s.Preccessor(s.Search(s.root, 5)).key)
