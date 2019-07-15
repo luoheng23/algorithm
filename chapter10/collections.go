@@ -1,4 +1,4 @@
-// Package chapter10 include Stack, Queue, DoubleLinkedList
+// Package chapter10 include Stack, Queue, DoubleLinkedList, tree
 package chapter10
 
 import "fmt"
@@ -27,7 +27,7 @@ func (s *Stack) isFull() bool {
 
 // Push an element
 func (s *Stack) Push(x int) error {
-	if s.isFull() {
+	if !s.isFull() {
 		s.top++
 		s.A[s.top] = x
 		return nil
@@ -128,3 +128,23 @@ func (d *DoubleLinkedList) Insert(x *Node) {
 	d.NIL.next = x
 	x.prev = d.NIL
 }
+
+// TreeNode is the node of tree
+type TreeNode struct {
+	key int
+	left, right *TreeNode
+	p *TreeNode
+}
+
+// TreeNode2 left-child right-sibling representation
+type TreeNode2 struct {
+	key int
+	leftChild, rightSibling *TreeNode2
+	p *TreeNode
+}
+
+// Tree represents a tree
+type Tree struct {
+	root TreeNode
+}
+

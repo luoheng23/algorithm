@@ -7,7 +7,7 @@ func TestStack(t *testing.T) {
 	if v, ok := s.Pop(); ok == nil {
 		t.Errorf("Stack failed. Expected error, Got %d", v)
 	}
-	if !s.IsEmpty() {
+	if !s.isEmpty() {
 		t.Errorf("Stack failed. Expected True, Got False")
 	}
 	s.Push(2)
@@ -21,7 +21,7 @@ func TestStack(t *testing.T) {
 	if a != 5 || b != 4 || c != 3 || d != 2 {
 		t.Errorf("Stack failed. Expected (5, 4, 3, 2), Got (%d, %d, %d, %d)", a, b, c, d)
 	}
-	if !s.IsEmpty() {
+	if !s.isEmpty() {
 		t.Errorf("Stack failed. Expected True, Got False")
 	}
 }
@@ -49,10 +49,10 @@ func TestQueue(t *testing.T) {
 
 func TestDoubleLinkedList(t *testing.T) {
 	d := CreateDoubleLinkedList()
-	d.Insert(&node{key: 4})
-	d.Insert(&node{key: 6})
-	d.Insert(&node{key: 5})
-	d.Insert(&node{key: 3})
+	d.Insert(&Node{key: 4})
+	d.Insert(&Node{key: 6})
+	d.Insert(&Node{key: 5})
+	d.Insert(&Node{key: 3})
 	for _, a := range [4]int{3, 4, 5, 6} {
 		if d.Search(a).key != a {
 			t.Errorf("DoubleLinkedList failed. Expected %d, Got %d", a, d.Search(a).key)
