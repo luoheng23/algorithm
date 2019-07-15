@@ -1,5 +1,7 @@
 package chapter12
 
+import "fmt"
+
 // Node for SearchTree
 type Node struct {
 	key         int
@@ -75,7 +77,6 @@ func (s *SearchTree) QuickSearch(x *Node, k int) *Node {
 	}
 	return x
 }
-
 
 // Min rescursive
 func (s *SearchTree) Min(x *Node) *Node {
@@ -187,3 +188,62 @@ func (s *SearchTree) Delete(z *Node) {
 	}
 }
 
+// maximum priority queue
+// method:
+// InsertMax
+// Maximum
+// ExtractMax
+
+// InsertMax O(h)
+func (s *SearchTree) InsertMax(x int) {
+	s.Insert(&Node{key: x})
+}
+
+// Maximum O(h)
+func (s *SearchTree) Maximum() int {
+	max := s.Max(s.root)
+	if max != nil {
+		return max.key
+	}
+	return -1
+}
+
+// ExtractMax O(h)
+func (s *SearchTree) ExtractMax() (int, error) {
+	if s.root == nil {
+		return 0, fmt.Errorf("Heap overflow")
+	}
+	max := s.Max(s.root)
+	s.Delete(max)
+	return max.key, nil
+}
+
+// minimum priority queue
+// method:
+// Minimum
+// ExtractMin
+// InsertMin
+
+// InsertMin O(h)
+func (s *SearchTree) InsertMin(x int) {
+	s.Insert(&Node{key: x})
+}
+
+// Minimum O(h)
+func (s *SearchTree) Minimum() int {
+	min := s.Min(s.root)
+	if min != nil {
+		return min.key
+	}
+	return -1
+}
+
+// ExtractMin O(h)
+func (s *SearchTree) ExtractMin() (int, error) {
+	if s.root == nil {
+		return 0, fmt.Errorf("Heap overflow")
+	}
+	min := s.Min(s.root)
+	s.Delete(min)
+	return min.key, nil
+}
