@@ -144,9 +144,10 @@ func (b *BTree) Delete(x *BNode, k rune){
 			x.c[i].n++
 			if x.c[i+1].n >= b.t {
 				x.keys[i] = x.c[i+1].keys[0]
+				x.c[i].c[x.c[i].n++] = x.c[i+1].c[0] 
 				b.Delete(x.c[i+1], x.keys[i])
 				b.Delete(x.c[i], k)
-				} else {
+			} else {
 				copy(x.c[i].keys[x.c[i].n:], x.c[i+1].keys[:x.c[i+1].n])
 				x.c[i].n += x.c[i+1].n
 				copy(x.c[i].c[x.n+1:], x.c[i+1].c[:x.c[i+1].n+1])
@@ -156,6 +157,9 @@ func (b *BTree) Delete(x *BNode, k rune){
 			}
 		}
 		b.Delete(x.c[i], k)
+	}
+	if x.n == 0 && x == b.root {
+		b.root = x.c[0]
 	}
 }
 
