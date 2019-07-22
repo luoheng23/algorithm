@@ -7,7 +7,6 @@ def bfs(G, s):
     q = [s]
     while q != []:
         u = q.pop()
-        print(u)
         for v in G.Adj[u]:
             if G.V[v].color == G.WHITE:
                 G.V[v].color = G.GRAY
@@ -17,12 +16,23 @@ def bfs(G, s):
         G.V[u].color = G.BLACK
 
 
+def printPath(G, s, v):
+    if v == s:
+        print(s)
+    elif G.V[v].pi is None:
+        print(f"no path from {s} to {v} exists.")
+    else:
+        printPath(G, s, G.V[v].pi)
+        print(v)
+
+
 def main():
     vertex = [0, 1, 2, 3, 4, 5, 6, 7]
     edges = [(0, 1), (1, 2), (2, 3), (3, 4), (3, 5),
              (4, 5), (4, 7), (4, 6), (5, 6), (6, 7)]
     G = initGraph(vertex, edges)
     bfs(G, 3)
+    printPath(G, 3, 7)
 
 
 if __name__ == "__main__":
