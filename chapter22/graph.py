@@ -20,7 +20,6 @@ class Graph:
         self.Adj = defaultdict(list)
         for u, v in edges:
             self.Adj[u].append(v)
-            self.Adj[v].append(u)
 
     def __str__(self):
         return f"{self.V}, {self.Adj}"
