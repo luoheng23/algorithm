@@ -18,6 +18,7 @@ class Graph:
     def __init__(self, vertex, edges):
         self.V = {num: Vertex(num) for num in vertex}
         self.Adj = defaultdict(list)
+        self.E = edges
         for u, v in edges:
             self.Adj[u].append(v)
 
