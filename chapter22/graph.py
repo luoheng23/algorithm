@@ -6,25 +6,25 @@ class Vertex:
 
     def __init__(self, value):
         self.value = value
-        self.color = Graph.WHITE
-        self.d = float("inf")
-        self.pi = None
+
+    def __str__(self):
+        return f"{self.value}"
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Graph:
-    WHITE = 0
-    GRAY = 1
-    BLACK = 2
-
     def __init__(self, vertex, edges):
         self.V = {num: Vertex(num) for num in vertex}
         self.Adj = defaultdict(list)
         self.E = edges
-        for u, v, _ in edges:
+        for edge in edges:
+            u, v, *_ = edge
             self.Adj[u].append(v)
 
     def __str__(self):
-        return f"{self.V}, {self.Adj}"
+        return f"{self.V}, {self.E}"
 
 
 def initGraph(vertex, edges):

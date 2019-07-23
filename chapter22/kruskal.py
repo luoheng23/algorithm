@@ -1,12 +1,15 @@
 
 from graph import initGraph
 
+
 def makeSet(v):
     v.rank = 0
     v.p = v
 
+
 def union(u, v):
     link(findSet(u), findSet(v))
+
 
 def link(u, v):
     if u.rank > v.rank:
@@ -16,10 +19,12 @@ def link(u, v):
             v.rank += 1
         u.p = v
 
+
 def findSet(u):
     if u.p != u:
         u.p = findSet(u.p)
     return u.p
+
 
 def kruskal(G):
     A = []
@@ -32,13 +37,16 @@ def kruskal(G):
             union(G.V[u], G.V[v])
     return A
 
+
 def main():
     vertex = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
-    edges = [('a', 'b', 4), ('a', 'h', 8), ('b', 'c', 8),  ('c', 'd', 7), ('d', 'e', 9), 
-    ('e', 'f', 10), ('f', 'g', 2), ('g', 'h', 1), ('h', 'i', 7), ('g', 'i', 6),
-    ('i', 'c', 2), ('f', 'c', 4)]
+    edges = [('a', 'b', 4), ('a', 'h', 8), ('b', 'c', 8),  ('c', 'd', 7), ('d', 'e', 9),
+             ('e', 'f', 10), ('f', 'g', 2), ('g',
+                                             'h', 1), ('h', 'i', 7), ('g', 'i', 6),
+             ('i', 'c', 2), ('f', 'c', 4)]
     graph = initGraph(vertex, edges)
     print(kruskal(graph))
+
 
 if __name__ == "__main__":
     main()
