@@ -2,9 +2,10 @@
 from collections import defaultdict
 
 
-class Vertex(int):
+class Vertex:
 
     def __init__(self, value):
+        self.value = value
         self.color = Graph.WHITE
         self.d = float("inf")
         self.pi = None
@@ -19,7 +20,7 @@ class Graph:
         self.V = {num: Vertex(num) for num in vertex}
         self.Adj = defaultdict(list)
         self.E = edges
-        for u, v in edges:
+        for u, v, _ in edges:
             self.Adj[u].append(v)
 
     def __str__(self):
