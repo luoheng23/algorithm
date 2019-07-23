@@ -12,6 +12,9 @@ class Vertex:
 
     def __repr__(self):
         return self.__str__()
+    
+    def __eq__(self, value):
+        return self.value == value
 
 
 class Graph:
@@ -19,9 +22,14 @@ class Graph:
         self.V = {num: Vertex(num) for num in vertex}
         self.Adj = defaultdict(list)
         self.E = edges
+        self.W = {}
         for edge in edges:
-            u, v, *_ = edge
+            u, v, *w = edge
             self.Adj[u].append(v)
+            self.Adj[v].append(u)
+            if w != []:
+                self.W[u, v] = w[0]
+                self.W[v, u] = w[0]
 
     def __str__(self):
         return f"{self.V}, {self.E}"
