@@ -1,5 +1,8 @@
 
-from graph import initGraph
+import sys
+sys.path.insert(0, '..')
+
+from chapter22.graph import initGraph
 
 
 def makeSet(v):
