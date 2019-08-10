@@ -2,26 +2,26 @@ package chapter17
 
 // Stack is stack
 type Stack struct {
-	A []int
+	A   []int
 	top int
 }
 
 // Init create a stack
 func Init() Stack {
-	S = Stack{top: -1}
+	return Stack{top: -1}
 }
 
-func pop(S Stack) {
+func pop(S Stack) int {
 	if S.top > -1 {
-		top--
-		return S.A[top+1]
+		S.top--
+		return S.A[S.top+1]
 	}
 }
 
 func push(S Stack, x int) {
 	if S.top < len(S.A) {
-		top++
-		S.A[top] = x
+		S.top++
+		S.A[S.top] = x
 	}
 }
 

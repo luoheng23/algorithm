@@ -259,12 +259,12 @@ func (r *AVLTree) Delete(z *AVLNode) {
 	r.balance(x.p)
 }
 
-func (s *AVLTree) isBalance(r *AVLNode) bool {
-	if r == s.null {
+func (r *AVLTree) isBalance(n *AVLNode) bool {
+	if n == r.null {
 		return true
 	}
-	if math.Abs(float64(r.left.h-r.right.h)) >= 2 {
+	if math.Abs(float64(n.left.h-n.right.h)) >= 2 {
 		return false
 	}
-	return s.isBalance(r.left) && s.isBalance(r.right)
+	return r.isBalance(n.left) && r.isBalance(n.right)
 }

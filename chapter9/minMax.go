@@ -1,5 +1,6 @@
 package chapter9
 
+// Min return min O(n)
 func Min(A []int) int {
 	if len(A) < 1 {
 		return 0
@@ -13,6 +14,7 @@ func Min(A []int) int {
 	return min
 }
 
+// Max return max O(n)
 func Max(A []int) int {
 	if len(A) < 1 {
 		return 0
@@ -26,6 +28,7 @@ func Max(A []int) int {
 	return max
 }
 
+// MinMax return min and max O(1.5n)
 func MinMax(A []int) (min int, max int) {
 	if len(A) < 1 {
 		return 0, 0

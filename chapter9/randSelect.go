@@ -20,7 +20,7 @@ func randPartition(A []int, p, r int) int {
 	return partition(A, p, r)
 }
 
-// choose the ith element
+// RandSelect return the ith element O(n)
 func RandSelect(A []int, p, r, i int) int {
 	if p+1 == r {
 		return A[p]
