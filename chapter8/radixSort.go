@@ -23,10 +23,9 @@ func CountSortForRadixSort(A []int, d int, k int) {
 	}
 }
 
-
 // RadixSort O(d(n + k))
 func RadixSort(A []int, d int, k int) {
-	for i := 1; i < d + 1; i++ {
+	for i := 1; i < d+1; i++ {
 		CountSortForRadixSort(A, i, k)
 	}
 }
