@@ -13,3 +13,5 @@
 
 # for python
 __pycache__/
+*.pdf
+.vscode/
