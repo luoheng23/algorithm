@@ -2,7 +2,11 @@
 input: bad, adb (alpha characters)
 output: they are the same
 
-solution: use dict (hash)
+solution: hash
+1. no duplicated char:
+use a bitmap as hash
+2. duplicated char:
+use a array as hash
 """
 
 

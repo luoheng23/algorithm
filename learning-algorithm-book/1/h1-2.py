@@ -1,5 +1,5 @@
 """
-remove * to the left, while other characters don't change position
+move * to the left, while other characters don't change position
 
 solution: read the string from the bottom
 """

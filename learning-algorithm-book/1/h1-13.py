@@ -10,14 +10,14 @@ def longestRepeatedSubStr(s):
     if len(s) < 1:
         return ""
     sufStr = list(sorted([s[i:] for i in range(len(s))]))
-    subStr, length, maxSubStr, maxLen = s[0], 1, s[0], 1
+    maxSubStr, maxLen = s[0], 1
     for i in range(len(sufStr)-1):
-        j = 0
-        while j < min(len(sufStr[i]), len(sufStr[i+1])) and sufStr[i][j] == sufStr[i+1][j]:
-            j += 1
-        subStr, length = sufStr[i][:j], j
+        length = 0
+        minLen = min(len(sufStr[i]), len(sufStr[i+1]))
+        while length < minLen and sufStr[i][length] == sufStr[i+1][length]:
+            length += 1
         if length > maxLen:
-            maxSubStr, maxLen = subStr, length
+            maxSubStr, maxLen = sufStr[i][:length], length
     return maxSubStr
 
 

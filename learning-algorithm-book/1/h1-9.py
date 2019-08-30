@@ -13,30 +13,41 @@ solution:
 import copy
 
 
-def mergeSets(strSets):
-    cpStrSets = copy.deepcopy(strSets)
-    flag = True
-    while flag:
-        length = len(cpStrSets)
-        for i in range(length):
-            for j in range(i+1, length):
-                if cpStrSets[i] & cpStrSets[j]:
-                    cpStrSets[i] |= cpStrSets[j]
-                    del cpStrSets[j]
-                    flag = False
-                    break
-            if not flag:
-                flag = True
-                break
-        else:
-            flag = False
-    return cpStrSets
+def makeSet(x):
+    x.p = x
+    x.rank = 0
+
+
+def Union(x, y):
+    link(FindSet(x), FindSet(y))
+
+
+def link(x, y):
+    if x.rank > y.rank:
+        y.p = x
+    else:
+        x.p = y
+        if x.rank == y.rank:
+            y.rank += 1
+
+
+def FindSet(x):
+    if x != x.p:
+        x.p = FindSet(x.p)
+    return x.p
+
+
+def mergeSets(eles, sets):
+    for ele in eles:
+        makeSet(ele)
+    for 
 
 
 def main():
-    s = [{"aaa", "bbb", "ccc"}, {"bbb", "ddd"}, {
-        "eee", "fff"}, {"ggg"}, {"ddd", "hhh"}]
-    newS = mergeSets(s)
+    ele = ["", "aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg", "hhh"]
+    
+    sets = [(1, 2, 3), (2, 4), (5, 6), (7, ), (4, 8)]
+    newS = mergeSets(eles, sets)
     print(newS)
 
 
