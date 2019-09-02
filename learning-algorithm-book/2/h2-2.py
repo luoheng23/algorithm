@@ -1,6 +1,6 @@
 """
 input: numbers
-output: 3 once appear once 
+output: 3 number appear once 
 
 solution: ^
 """
@@ -10,18 +10,10 @@ from functools import reduce
 
 
 def findTheLastOne(x):
-    m = 0
-    if x == 0:
-        return 0
-    while True:
-        if x & (1 << m):
-            return m
-        m += 1
-
+    return x & (-x)
 
 def findTwoOnceNum(x, s):
-    m = findTheLastOne(x)
-    num = 1 << m
+    num = findTheLastOne(x)
     a, b = 0, 0
     for i in s:
         if i & num:
@@ -32,8 +24,7 @@ def findTwoOnceNum(x, s):
 
 
 def findThreeOnceNum(x, s):
-    m = findTheLastOne(x)
-    num = 1 << m
+    num = findTheLastOne(x)
     c = 0
     for i in s:
         if i & num:
@@ -46,7 +37,7 @@ def findThreeOnceNum(x, s):
 def main():
     s = list(range(9)) + list(range(9)) + list(range(10, 13))
     random.shuffle(s)
-    print(findThreeOnceNum(reduce(lambda x, y: x ^ y, s), s))
+    print(s, findThreeOnceNum(reduce(lambda x, y: x ^ y, s), s))
 
 
 if __name__ == "__main__":
